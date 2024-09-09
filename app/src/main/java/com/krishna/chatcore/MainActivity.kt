@@ -13,6 +13,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.krishna.chatcore.DrawerItem.*
@@ -37,6 +38,9 @@ fun MainScreen() {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
 
+    // Add a state variable to hold the text input
+    var inputText by remember { mutableStateOf("") }
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -47,10 +51,7 @@ fun MainScreen() {
                             drawerState.close()
                             // Handle item selection
                             when (item) {
-                                About -> {
-                                    // Example of handling About action
-                                }
-                                // Handle other items
+                                About -> { /* Handle About action */ }
                                 NewChat -> TODO()
                                 Personalities -> TODO()
                                 Settings -> TODO()
@@ -92,27 +93,34 @@ fun MainScreen() {
                             .fillMaxWidth()
                             .padding(end = 8.dp)
                     ) {
+                        // Display and update the text input
                         TextField(
-                            value = "",
-                            onValueChange = { /* Handle text field value change */ },
-                            placeholder = { Text("Type your query") },
+                            value = inputText, // Bind the state variable
+                            onValueChange = { inputText = it }, // Update the state on change
+                            placeholder = { Text("Type your query here") },
                             modifier = Modifier
                                 .weight(1f)
                                 .padding(end = 8.dp)
-                                .clip(MaterialTheme.shapes.medium),
+                                .clip(MaterialTheme.shapes.extraLarge) // Use extraLarge for pill shape
+                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)), // Background color for the pill
                             colors = TextFieldDefaults.colors(
                                 focusedTextColor = MaterialTheme.colorScheme.onSurface,
                                 unfocusedTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                                 disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
                                 errorTextColor = MaterialTheme.colorScheme.error,
-                                focusedContainerColor = MaterialTheme.colorScheme.surface,
-                                unfocusedContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.12f),
-                                disabledContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.12f),
+                                focusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), // Lighter background when focused
+                                unfocusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), // Lighter background when unfocused
+                                disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.05f),
                                 errorContainerColor = MaterialTheme.colorScheme.errorContainer,
                                 cursorColor = MaterialTheme.colorScheme.primary,
-                                errorCursorColor = MaterialTheme.colorScheme.error
+                                errorCursorColor = MaterialTheme.colorScheme.error,
+                                focusedIndicatorColor = Color.Transparent, // Remove focused underline
+                                unfocusedIndicatorColor = Color.Transparent, // Remove unfocused underline
+                                disabledIndicatorColor = Color.Transparent // Remove disabled underline
                             )
                         )
+
+
                         IconButton(onClick = { /* Handle send button click */ }) {
                             Icon(Icons.AutoMirrored.Filled.Send, contentDescription = "Send")
                         }
@@ -126,6 +134,7 @@ fun MainScreen() {
         }
     }
 }
+
 
 @Composable
 fun DrawerContent(onItemSelected: (DrawerItem) -> Unit) {
