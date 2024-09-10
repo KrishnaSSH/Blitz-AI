@@ -1,4 +1,4 @@
-package com.krishna.chatcore.ui.theme
+package com.krishna.blitzai.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

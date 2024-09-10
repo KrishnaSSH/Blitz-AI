@@ -1,4 +1,4 @@
-package com.krishna.chatcore
+package com.krishna.blitzai
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -16,8 +16,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.krishna.chatcore.DrawerItem.*
-import com.krishna.chatcore.ui.theme.ChatCoreTheme
+import com.krishna.blitzai.DrawerItem.*
+import com.krishna.blitzai.network.NetworkClient
+import com.krishna.blitzai.ui.theme.ChatCoreTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +26,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ChatCoreTheme {
-                // Main content
                 MainScreen()
             }
         }
@@ -38,8 +38,10 @@ fun MainScreen() {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
 
-    // Add a state variable to hold the text input
     var inputText by remember { mutableStateOf("") }
+    var responseText by remember { mutableStateOf("") }
+
+    val apiKey = BuildConfig.GROQ_API_KEY // Access API key from BuildConfig
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -49,7 +51,6 @@ fun MainScreen() {
                     onItemSelected = { item ->
                         coroutineScope.launch {
                             drawerState.close()
-                            // Handle item selection
                             when (item) {
                                 About -> { /* Handle About action */ }
                                 NewChat -> TODO()
@@ -65,7 +66,7 @@ fun MainScreen() {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("ChatCore", fontSize = 20.sp) },
+                    title = { Text("Blitz AI", fontSize = 20.sp) },
                     navigationIcon = {
                         IconButton(onClick = {
                             coroutineScope.launch {
@@ -76,9 +77,6 @@ fun MainScreen() {
                         }
                     }
                 )
-            },
-            floatingActionButton = {
-                // FloatingActionButton removed
             },
             bottomBar = {
                 Box(
@@ -93,35 +91,38 @@ fun MainScreen() {
                             .fillMaxWidth()
                             .padding(end = 8.dp)
                     ) {
-                        // Display and update the text input
                         TextField(
-                            value = inputText, // Bind the state variable
-                            onValueChange = { inputText = it }, // Update the state on change
+                            value = inputText,
+                            onValueChange = { inputText = it },
                             placeholder = { Text("Type your query here") },
                             modifier = Modifier
                                 .weight(1f)
                                 .padding(end = 8.dp)
-                                .clip(MaterialTheme.shapes.extraLarge) // Use extraLarge for pill shape
-                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)), // Background color for the pill
+                                .clip(MaterialTheme.shapes.extraLarge)
+                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
                             colors = TextFieldDefaults.colors(
                                 focusedTextColor = MaterialTheme.colorScheme.onSurface,
                                 unfocusedTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                                 disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
                                 errorTextColor = MaterialTheme.colorScheme.error,
-                                focusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), // Lighter background when focused
-                                unfocusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f), // Lighter background when unfocused
+                                focusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+                                unfocusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
                                 disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.05f),
                                 errorContainerColor = MaterialTheme.colorScheme.errorContainer,
                                 cursorColor = MaterialTheme.colorScheme.primary,
                                 errorCursorColor = MaterialTheme.colorScheme.error,
-                                focusedIndicatorColor = Color.Transparent, // Remove focused underline
-                                unfocusedIndicatorColor = Color.Transparent, // Remove unfocused underline
-                                disabledIndicatorColor = Color.Transparent // Remove disabled underline
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent,
+                                disabledIndicatorColor = Color.Transparent
                             )
                         )
 
-
-                        IconButton(onClick = { /* Handle send button click */ }) {
+                        IconButton(onClick = {
+                            coroutineScope.launch {
+                                responseText = NetworkClient.postRequest(apiKey, inputText) ?: "Failed to get response"
+                                inputText = "" // Clear the input field
+                            }
+                        }) {
                             Icon(Icons.AutoMirrored.Filled.Send, contentDescription = "Send")
                         }
                     }
@@ -129,18 +130,25 @@ fun MainScreen() {
             }
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
-                // Main screen content
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
+                ) {
+                    Text(text = "Query: $inputText", fontSize = 20.sp, color = Color.White)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(text = "Response: $responseText", fontSize = 20.sp, color = Color.White)
+                }
             }
         }
     }
 }
 
-
 @Composable
 fun DrawerContent(onItemSelected: (DrawerItem) -> Unit) {
     Column {
         Text(
-            text = "ChatCore",
+            text = "Blitz AI",
             modifier = Modifier.padding(16.dp),
             style = MaterialTheme.typography.headlineSmall.copy(fontSize = 20.sp)
         )

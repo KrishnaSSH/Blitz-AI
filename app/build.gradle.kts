@@ -4,16 +4,16 @@ plugins {
 }
 
 android {
-    namespace = "com.krishna.chatcore"
-    compileSdk = 34
+    namespace = "com.krishna.blitzai"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.krishna.chatcore"
+        applicationId = "com.krishna.blitzai"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
+        buildConfigField("String", "GROQ_API_KEY", "\"${project.properties["GROQ_API_KEY"]}\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -41,6 +41,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true // Enable BuildConfig
     }
 
     composeOptions {
@@ -55,6 +56,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.logging.interceptor)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -68,6 +70,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.okhttp)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

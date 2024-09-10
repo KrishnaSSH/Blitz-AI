@@ -1,4 +1,4 @@
-package com.krishna.chatcore
+package com.krishna.blitzai
 
 import org.junit.Test
 
