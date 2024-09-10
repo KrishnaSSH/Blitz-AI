@@ -1,14 +1,11 @@
 package com.krishna.blitzai
 
 import android.os.Bundle
-import android.view.WindowInsetsController
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Message
-import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -16,13 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.krishna.blitzai.DrawerItem.*
-import com.krishna.blitzai.network.NetworkClient
+import com.krishna.blitzai.fragments.*
 import com.krishna.blitzai.ui.theme.ChatCoreTheme
 import kotlinx.coroutines.launch
 
@@ -54,10 +54,25 @@ fun MainScreen() {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
 
+    var selectedScreen by remember { mutableStateOf<Screen>(Screen.NewChat) }
     var inputText by remember { mutableStateOf("") }
     var responseText by remember { mutableStateOf("") }
 
-    val apiKey = BuildConfig.GROQ_API_KEY // Access API key from BuildConfig
+    val topBarTitle = when (selectedScreen) {
+        Screen.NewChat -> "New Chat"
+        Screen.Personalities -> "Personalities"
+        Screen.Settings -> "Settings"
+        Screen.About -> "About"
+    }
+
+    // Get the current WindowInsets
+    val view = LocalView.current
+    val density = LocalDensity.current.density
+    val insets = ViewCompat.getRootWindowInsets(view)
+    val imeBottom = insets?.isVisible(WindowInsetsCompat.Type.ime())?.let {
+        insets.getInsets(WindowInsetsCompat.Type.ime()).bottom
+    } ?: 0
+    val bottomPadding = (imeBottom / density).dp
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -67,12 +82,7 @@ fun MainScreen() {
                     onItemSelected = { item ->
                         coroutineScope.launch {
                             drawerState.close()
-                            when (item) {
-                                About -> { /* Handle About action */ }
-                                NewChat -> TODO()
-                                Personalities -> TODO()
-                                Settings -> TODO()
-                            }
+                            selectedScreen = item
                         }
                     }
                 )
@@ -82,7 +92,7 @@ fun MainScreen() {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("Blitz AI", fontSize = 30.sp) },
+                    title = { Text(topBarTitle, fontSize = 30.sp) },
                     navigationIcon = {
                         IconButton(onClick = {
                             coroutineScope.launch {
@@ -95,17 +105,9 @@ fun MainScreen() {
                 )
             },
             bottomBar = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 30.dp)
-                        .clip(MaterialTheme.shapes.medium)
-                        .background(MaterialTheme.colorScheme.surface)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(end = 8.dp)
+                if (selectedScreen == Screen.NewChat) {
+                    BottomAppBar(
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
                     ) {
                         TextField(
                             value = inputText,
@@ -114,55 +116,74 @@ fun MainScreen() {
                             modifier = Modifier
                                 .weight(1f)
                                 .padding(end = 8.dp)
-                                .clip(MaterialTheme.shapes.extraLarge)
-                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
+                                .clip(MaterialTheme.shapes.medium)
+                                .background(MaterialTheme.colorScheme.surface)
+                                .padding(bottom = bottomPadding), // Add bottom padding here
                             colors = TextFieldDefaults.colors(
                                 focusedTextColor = MaterialTheme.colorScheme.onSurface,
                                 unfocusedTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-                                disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
-                                errorTextColor = MaterialTheme.colorScheme.error,
-                                focusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-                                unfocusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-                                disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.05f),
-                                errorContainerColor = MaterialTheme.colorScheme.errorContainer,
                                 cursorColor = MaterialTheme.colorScheme.primary,
-                                errorCursorColor = MaterialTheme.colorScheme.error,
                                 focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                                disabledIndicatorColor = Color.Transparent
+                                unfocusedIndicatorColor = Color.Transparent
                             )
                         )
 
                         IconButton(onClick = {
-                            coroutineScope.launch {
-                                val result = NetworkClient.postRequest(apiKey, inputText)
-                                if (result != null) {
-                                    responseText = result
-                                } else {
-                                    responseText = "Failed to get response"
-                                }
-                                inputText = "" // Clear the input field
-                            }
+                            // Handle Send action here
+                            responseText = "Sent message: $inputText"
+                            inputText = "" // Clear the input field
                         }) {
-                            Icon(Icons.AutoMirrored.Filled.Send, contentDescription = "Send")
+                            Icon(Icons.Filled.Send, contentDescription = "Send")
                         }
-
                     }
                 }
             }
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp)
-                ) {
-                    Text(text = "Query: $inputText", fontSize = 20.sp, color = Color.White)
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = "Response: $responseText", fontSize = 20.sp, color = Color.White)
+                when (selectedScreen) {
+                    Screen.NewChat -> NewChatFragment()
+                    Screen.Personalities -> PersonalitiesFragment()
+                    Screen.Settings -> SettingsFragment()
+                    Screen.About -> AboutFragment()
                 }
             }
         }
+    }
+}
+
+@Composable
+fun DrawerContent(onItemSelected: (Screen) -> Unit) {
+    Column {
+        Text(
+            text = "Blitz AI",
+            modifier = Modifier.padding(20.dp),
+            style = MaterialTheme.typography.headlineSmall.copy(fontSize = 30.sp)
+        )
+        HorizontalDivider()
+        NavigationDrawerItem(
+            icon = { Icon(Icons.Filled.Message, contentDescription = null) },
+            label = { Text("New Chat") },
+            selected = false,
+            onClick = { onItemSelected(Screen.NewChat) }
+        )
+        NavigationDrawerItem(
+            icon = { Icon(Icons.Filled.Person, contentDescription = null) },
+            label = { Text("Personalities") },
+            selected = false,
+            onClick = { onItemSelected(Screen.Personalities) }
+        )
+        NavigationDrawerItem(
+            icon = { Icon(Icons.Filled.Settings, contentDescription = null) },
+            label = { Text("Settings") },
+            selected = false,
+            onClick = { onItemSelected(Screen.Settings) }
+        )
+        NavigationDrawerItem(
+            icon = { Icon(Icons.Filled.Info, contentDescription = null) },
+            label = { Text("About") },
+            selected = false,
+            onClick = { onItemSelected(Screen.About) }
+        )
     }
 }
 
@@ -174,50 +195,6 @@ fun MainScreenPreview() {
     }
 }
 
-@Composable
-fun DrawerContent(onItemSelected: (DrawerItem) -> Unit) {
-    Column {
-        Text(
-            text = "Blitz AI",
-            modifier = Modifier.padding(20.dp),
-            style = MaterialTheme.typography.headlineSmall.copy(fontSize = 30.sp)
-        )
-        HorizontalDivider()
-        NavigationDrawerItem(
-            icon = { Icon(Icons.AutoMirrored.Filled.Message, contentDescription = null) },
-            label = { Text("New Chat") },
-            selected = false,
-            onClick = { onItemSelected(NewChat) }
-        )
-        NavigationDrawerItem(
-            icon = { Icon(Icons.Filled.Person, contentDescription = null) },
-            label = { Text("Personalities") },
-            selected = false,
-            onClick = { onItemSelected(Personalities) }
-        )
-        NavigationDrawerItem(
-            icon = { Icon(Icons.Filled.Settings, contentDescription = null) },
-            label = { Text("Settings") },
-            selected = false,
-            onClick = { onItemSelected(Settings) }
-        )
-        NavigationDrawerItem(
-            icon = { Icon(Icons.Filled.Info, contentDescription = null) },
-            label = { Text("About") },
-            selected = false,
-            onClick = { onItemSelected(About) }
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DrawerContentPreview() {
-    ChatCoreTheme {
-        DrawerContent(onItemSelected = {})
-    }
-}
-
-enum class DrawerItem {
+enum class Screen {
     NewChat, Personalities, Settings, About
 }

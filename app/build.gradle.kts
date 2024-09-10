@@ -56,6 +56,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.compose.bom.v202410) // Use the latest BOM version
+    implementation(libs.ui)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.material3)
     implementation(libs.logging.interceptor)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
