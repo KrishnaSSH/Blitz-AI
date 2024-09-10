@@ -1,6 +1,7 @@
 package com.krishna.blitzai
 
 import android.os.Bundle
+import android.view.WindowInsetsController
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -14,8 +15,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.krishna.blitzai.DrawerItem.*
 import com.krishna.blitzai.network.NetworkClient
 import com.krishna.blitzai.ui.theme.ChatCoreTheme
@@ -24,6 +29,17 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Set the status bar and navigation bar colors to blend with the activity
+        window.statusBarColor = Color.Transparent.toArgb()
+        window.navigationBarColor = Color.Transparent.toArgb()
+
+        // Control the appearance of icons in the status bar and navigation bar
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val insetsController = WindowInsetsControllerCompat(window, window.decorView)
+        insetsController.isAppearanceLightStatusBars = false // Set to true if you want light icons
+        insetsController.isAppearanceLightNavigationBars = false // Set to true if you want light icons
+
         setContent {
             ChatCoreTheme {
                 MainScreen()
@@ -66,7 +82,7 @@ fun MainScreen() {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("Blitz AI", fontSize = 20.sp) },
+                    title = { Text("Blitz AI", fontSize = 30.sp) },
                     navigationIcon = {
                         IconButton(onClick = {
                             coroutineScope.launch {
@@ -82,7 +98,7 @@ fun MainScreen() {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .padding(horizontal = 20.dp, vertical = 30.dp)
                         .clip(MaterialTheme.shapes.medium)
                         .background(MaterialTheme.colorScheme.surface)
                 ) {
@@ -119,12 +135,18 @@ fun MainScreen() {
 
                         IconButton(onClick = {
                             coroutineScope.launch {
-                                responseText = NetworkClient.postRequest(apiKey, inputText) ?: "Failed to get response"
+                                val result = NetworkClient.postRequest(apiKey, inputText)
+                                if (result != null) {
+                                    responseText = result
+                                } else {
+                                    responseText = "Failed to get response"
+                                }
                                 inputText = "" // Clear the input field
                             }
                         }) {
                             Icon(Icons.AutoMirrored.Filled.Send, contentDescription = "Send")
                         }
+
                     }
                 }
             }
@@ -144,13 +166,21 @@ fun MainScreen() {
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun MainScreenPreview() {
+    ChatCoreTheme {
+        MainScreen()
+    }
+}
+
 @Composable
 fun DrawerContent(onItemSelected: (DrawerItem) -> Unit) {
     Column {
         Text(
             text = "Blitz AI",
-            modifier = Modifier.padding(16.dp),
-            style = MaterialTheme.typography.headlineSmall.copy(fontSize = 20.sp)
+            modifier = Modifier.padding(20.dp),
+            style = MaterialTheme.typography.headlineSmall.copy(fontSize = 30.sp)
         )
         HorizontalDivider()
         NavigationDrawerItem(
@@ -177,6 +207,14 @@ fun DrawerContent(onItemSelected: (DrawerItem) -> Unit) {
             selected = false,
             onClick = { onItemSelected(About) }
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DrawerContentPreview() {
+    ChatCoreTheme {
+        DrawerContent(onItemSelected = {})
     }
 }
 

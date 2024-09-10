@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatCore"
         tools:targetApi="31" >
-        <activity
-            android:name=".AboutActivity"
-            android:exported="false" />
+
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -27,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
