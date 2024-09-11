@@ -68,7 +68,7 @@ fun ChatScreen(navController: NavController) {
         derivedStateOf {
             lazyListState.canScrollBackward && !viewModel.addingMyMessage && (
                     lazyListState.firstVisibleItemIndex > 0 || lazyListState.firstVisibleItemScrollOffset > 50
-            )
+                    )
         }
     }
 

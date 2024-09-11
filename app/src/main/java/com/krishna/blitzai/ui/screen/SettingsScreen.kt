@@ -12,18 +12,26 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -44,7 +52,11 @@ fun SettingsScreen(navController: NavController) {
     val viewModel = hiltViewModel<SettingsViewModel>()
 
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
-    
+
+    var selectedModel by remember { mutableStateOf("mixtral-8x7b-32768") }
+    var customModel by remember { mutableStateOf("") }
+    var showModelDropdown by remember { mutableStateOf(false) }
+
     Column {
         LargeTopAppBar(
             title = { Text(text = stringResource(id = R.string.settings)) },
@@ -82,12 +94,54 @@ fun SettingsScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.size(10.dp))
 
-                SettingsTextField(
-                    value = viewModel.model,
-                    onValueChange = { viewModel.model = it },
-                    labelResource = R.string.model,
-                    viewModel = viewModel
+                // Model Selection Dropdown
+                OutlinedTextField(
+                    value = if (selectedModel == "Custom") customModel else selectedModel,
+                    onValueChange = { newValue ->
+                        if (selectedModel == "Custom") {
+                            customModel = newValue
+                            viewModel.model = newValue
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text("Model") },
+                    trailingIcon = {
+                        IconButton(onClick = { showModelDropdown = true }) {
+                            Icon(
+                                imageVector = Icons.Filled.ArrowDropDown,
+                                contentDescription = "Select Model"
+                            )
+                        }
+
+
+            }
                 )
+
+                // Dropdown Menu
+                DropdownMenu(
+                    expanded = showModelDropdown,
+                    onDismissRequest = { showModelDropdown = false }
+                ) {
+                    listOf(
+                        "mixtral-8x7b-32768",
+                        "llama3-8b-8192",
+                        "llama3-70b-8192",
+                        "gemma-7b-it",
+                        "gemma2-9b-it",
+                        "Custom"
+                    ).forEach { model ->
+                        DropdownMenuItem(
+                            text = { Text(model) },
+                            onClick = {
+                                selectedModel = model
+                                showModelDropdown = false
+                                if (model != "Custom") {
+                                    viewModel.model = model
+                                }
+                            }
+                        )
+                    }
+                }
 
                 Spacer(modifier = Modifier.size(10.dp))
 
@@ -123,7 +177,7 @@ fun SettingsScreen(navController: NavController) {
                 }
             }
         }
-        
+
         ErrorAlertDialog(viewModel = viewModel)
     }
 }
@@ -144,7 +198,6 @@ private fun SettingsTextField(
             viewModel.changesMade = true
         },
         label = { Text(text = stringResource(id = labelResource)) },
-        keyboardOptions = keyboardOptions,
-        shape = RoundedCornerShape(12.dp)
+        keyboardOptions = keyboardOptions
     )
 }
