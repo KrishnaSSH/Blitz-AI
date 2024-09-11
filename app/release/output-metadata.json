@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 16,
-      "versionName": "1.1.5",
-      "outputFile": "Sense-1.1.5.apk"
+      "versionCode": 1,
+      "versionName": "1.0",
+      "outputFile": "Sense-1.0.apk"
     }
   ],
   "elementType": "File",
@@ -22,14 +22,14 @@
       "minApi": 28,
       "maxApi": 30,
       "baselineProfiles": [
-        "baselineProfiles/1/Sense-1.1.5.dm"
+        "baselineProfiles/1/Sense-1.0.dm"
       ]
     },
     {
       "minApi": 31,
       "maxApi": 2147483647,
       "baselineProfiles": [
-        "baselineProfiles/0/Sense-1.1.5.dm"
+        "baselineProfiles/0/Sense-1.0.dm"
       ]
     }
   ],
