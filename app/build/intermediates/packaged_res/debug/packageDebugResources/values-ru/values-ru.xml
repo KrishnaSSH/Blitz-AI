@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="api_key">API Ключ</string>
+    <string name="api_key_is_required_to_access_api">Ключ необходим для доступа к API OpenAI</string>
+    <string name="audio">Аудио</string>
+    <string name="chats">Чаты</string>
+    <string name="delete">Удалить</string>
+    <string name="download_started">Загрузка началась</string>
+    <string name="endpoint">Эндпоинт</string>
+    <string name="error">Ошибка</string>
+    <string name="file_format">Формат файла</string>
+    <string name="how_to_get_it">Как его получить</string>
+    <string name="instruction_part_1_1">Войдите в свой аккаунт на</string>
+    <string name="instruction_part_2">Нажмите на иконку профиля</string>
+    <string name="instruction_part_3">Нажмите \"View API Keys\"</string>
+    <string name="instruction_part_4">Нажмите \"Create new secret key\"</string>
+    <string name="instruction_part_5">Скопируйте его и вставьте ниже</string>
+    <string name="message">Сообщение</string>
+    <string name="model">Модель</string>
+    <string name="nothing_there">Здесь пусто</string>
+    <string name="picture">Изображение</string>
+    <string name="pictures">Изображения</string>
+    <string name="prompt">Запрос</string>
+    <string name="settings">Настройки</string>
+    <string name="setup">Настройка</string>
+    <string name="speed">Скорость</string>
+    <string name="temperature">Температура</string>
+    <string name="text">Текст</string>
+    <string name="voice">Голос</string>
+    <string name="you">Вы</string>
+</resources>

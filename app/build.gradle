@@ -26,15 +26,7 @@ android {
         }
     }
 
-    // ABI Splits Configuration
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-            universalApk false  // Set to true if you want to generate a universal APK
-        }
-    }
+
 
     applicationVariants.configureEach { variant ->
         variant.outputs.configureEach {

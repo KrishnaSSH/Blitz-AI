@@ -93,7 +93,7 @@ fun TypingMessage(needTitle: Boolean = true) {
     BaseMessage(
         message = message,
         needTitle = needTitle
-    ) { modifier, expanded ->
+    ) { _, expanded ->
         PulsatingDots(
             modifier = Modifier
                 .messageBubble(message)

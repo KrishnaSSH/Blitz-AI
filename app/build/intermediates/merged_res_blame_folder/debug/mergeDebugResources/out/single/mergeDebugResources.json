@@ -1,0 +1,102 @@
+[
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.krishna.blitzai.app-main-84:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_arrow_down.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_arrow_down.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_download.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_download.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_copy.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_copy.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.krishna.blitzai.app-main-84:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.krishna.blitzai.app-main-84:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.krishna.blitzai.app-main-84:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_settings.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/xml_file_paths.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_delete_message.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_delete_message.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_delete.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_delete.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_done.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_done.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_share.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_share.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.krishna.blitzai.app-main-84:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_arrow_back.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_arrow_back.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.krishna.blitzai.app-main-84:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.krishna.blitzai.app-main-84:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.krishna.blitzai.app-main-84:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.krishna.blitzai.app-pngs-78:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_arrow_upward.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_arrow_upward.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.krishna.blitzai.app-main-84:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_dots.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_dots.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/drawable_ic_add.xml.flat",
+        "source": "com.krishna.blitzai.app-main-84:/drawable/ic_add.xml"
+    },
+    {
+        "merged": "com.krishna.blitzai.app-debug-82:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.krishna.blitzai.app-main-84:/mipmap-hdpi/ic_launcher.png"
+    }
+]
