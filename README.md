@@ -1,11 +1,10 @@
 # Blitz AI
 
-Blitz AI is an android application built with jetpack Compose which utilizes [Groq Cloud](https://console.groq.com/docs/quickstart) to generate responses
-
+Blitz AI is an Android application built with Jetpack Compose which utilizes [Groq Cloud](https://console.groq.com/docs/quickstart) to generate responses
 
 ## Why Blitz AI?
 
-- **Ridiculously Fast**: Responses happen in real time—no more long waits for answers.
+- **Ridiculously Fast**: Responses happen in real-time—no more long waits for answers.
 - **Super Accurate**: Delivers better results than competitors, so you're not left second-guessing.
 - **Groq Cloud Power**: Blitz AI is backed by the speed and efficiency of Groq Cloud, meaning it’s optimized for performance.
 
@@ -24,23 +23,25 @@ Here are the models Blitz AI supports, along with their developer names and uniq
 | **Gemma 7B**        | Google            | `gemma-7b-it`               |
 | **Gemma 2 9B**      | Google            | `gemma2-9b-it`              |
 
-A detailed list of all the models are provided [here](https://console.groq.com/docs/models)
+A detailed list of all the models is provided [here](https://console.groq.com/docs/models)
 
 <br/>
 
 ## Comparison between models
 
-### Speed
-<img src="assets/speed.png" width="300" alt="Speed Comparison"/>
-<br/>
+### Speed, Quality, and Price
 
-### Quality
-<br/>
-
-<img src="assets/quality.png" width="300" alt="Quality Comparison"/>
-
-### Price
-
-<br/>
-
-<img src="assets/price.png" width="300" alt="Price Comparison"/>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  <div style="text-align: center; flex: 1 1 300px;">
+    <img src="assets/speed.png" width="300" alt="Speed Comparison"/>
+    <p>Speed</p>
+  </div>
+  <div style="text-align: center; flex: 1 1 300px;">
+    <img src="assets/quality.png" width="300" alt="Quality Comparison"/>
+    <p>Quality</p>
+  </div>
+  <div style="text-align: center; flex: 1 1 300px;">
+    <img src="assets/price.png" width="300" alt="Price Comparison"/>
+    <p>Price</p>
+  </div>
+</div>
