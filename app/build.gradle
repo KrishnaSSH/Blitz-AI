@@ -30,7 +30,7 @@ android {
 
     applicationVariants.configureEach { variant ->
         variant.outputs.configureEach {
-            outputFileName = "Sense-${variant.versionName}.apk"
+            outputFileName = "Blitz-${variant.versionName}.apk"
         }
     }
 
