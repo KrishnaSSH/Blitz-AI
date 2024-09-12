@@ -26,7 +26,7 @@
     <string name="instruction_part_1_1">Log in to your account on</string>
     <string name="instruction_part_1_2" translatable="false">Groq</string>
     <string name="instruction_part_2">Tap on the API keys Section</string>
-    <string name="instruction_part_3">Tap \"You will See a New Page\"</string>
+    <string name="instruction_part_3">\"You will See a New Page\"</string>
     <string name="instruction_part_4">Tap \"Click Create API key\"</string>
     <string name="instruction_part_5">Copy it and paste below</string>
 
