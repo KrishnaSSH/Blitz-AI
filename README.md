@@ -29,19 +29,19 @@ A detailed list of all the models is provided [here](https://console.groq.com/do
 
 ## Comparison between models
 
-### Speed, Quality, and Price
+
 
 <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-  <div style="text-align: center; flex: 1 1 300px;">
-    <img src="assets/speed.png" width="300" alt="Speed Comparison"/>
-    <p>Speed</p>
-  </div>
-  <div style="text-align: center; flex: 1 1 300px;">
-    <img src="assets/quality.png" width="300" alt="Quality Comparison"/>
+  <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+    <img src="assets/quality.png" width="100%" alt="Quality Comparison"/>
     <p>Quality</p>
   </div>
-  <div style="text-align: center; flex: 1 1 300px;">
-    <img src="assets/price.png" width="300" alt="Price Comparison"/>
+  <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+    <img src="assets/price.png" width="100%" alt="Price Comparison"/>
     <p>Price</p>
+  </div>
+  <div style="flex: 1 1 100%; max-width: 100%; text-align: center;">
+    <img src="assets/speed.png" width="100%" alt="Speed Comparison"/>
+    <p>Speed</p>
   </div>
 </div>
