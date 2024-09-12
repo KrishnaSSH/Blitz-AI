@@ -11,6 +11,8 @@ plugins {
 android {
     compileSdk 34
 
+    
+
     namespace "com.krishna.blitzai"
     defaultConfig {
         applicationId "com.krishna.blitzai"

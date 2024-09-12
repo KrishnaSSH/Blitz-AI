@@ -31,8 +31,10 @@ buildscript {
 }
 
 plugins {
+
     //noinspection GradlePluginVersion
     id 'com.android.application' version "$agp_version" apply false
+
     //noinspection GradlePluginVersion
     id 'com.android.library' version "$agp_version" apply false
     id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
