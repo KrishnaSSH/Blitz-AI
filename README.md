@@ -3,7 +3,7 @@
 Blitz AI is an android application built with jetpack Compose which utilizes [Groq Cloud](https://console.groq.com/docs/quickstart) to generate responses
 
 
-# Screenshots
+## Screenshots
 <div style="display: flex; justify-content: space-between;">
   <img src="assets/screenshots/one.png" width="90" alt="Screenshot 1"/>
   <img src="assets/screenshots/two.png" width="90" alt="Screenshot 1"/>
@@ -16,6 +16,14 @@ Blitz AI is an android application built with jetpack Compose which utilizes [Gr
 - **Ridiculously Fast**: Responses happen in real time—no more long waits for answers.
 - **Super Accurate**: Delivers better results than competitors, so you're not left second-guessing.
 - **Groq Cloud Power**: Blitz AI is backed by the speed and efficiency of Groq Cloud, meaning it’s optimized for performance.
+
+## Download
+
+<a href="https://github.com/krishnassh/blitz-ai/releases/latest" target="_blank">
+  <img src="assets/github.png" width="300" alt="Get it on Github"/>
+</a>
+
+
 
 ## Supported Models
 
