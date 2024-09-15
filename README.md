@@ -24,6 +24,13 @@ Blitz AI is an android application built with jetpack Compose which utilizes [Gr
 </a>
 
 
+## Discussions 
+
+
+<a href="https://t.me/blitzzAI" target="_blank">
+  <img src="assets/telegram.png" width="260" alt="Telegram Discussions"/>
+</a>
+
 
 ## Supported Models
 
