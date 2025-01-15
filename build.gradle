@@ -10,7 +10,7 @@ buildscript {
         gson_version = '2.10.1'
         retrofit_version = '2.9.0'
         okhttp_version = '4.11.0'
-        hilt_version = '2.48'
+        hilt_version = '2.55'
         hilt_navigation_version = '1.1.0'
 
         androidx_core_version = '1.12.0'
