@@ -1,4 +1,4 @@
-# Blitz AI
+# Blitz AI -2
 
 Blitz AI is an android application built with jetpack Compose which utilizes [Groq Cloud](https://console.groq.com/docs/quickstart) to generate responses
 
