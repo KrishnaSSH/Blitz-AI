@@ -22,7 +22,7 @@ buildscript {
         material3_version = '1.2.1'
         compose_version = '1.5.4'
 
-        navigation_version = '2.7.5'
+        navigation_version = '2.9.4'
 
         junit_version = '4.13.2'
         androidx_junit_version = '1.2.1'
